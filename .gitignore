@@ -1,0 +1,15 @@
+engine/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+downloades/
+cookies.txt
+.env
+.env.*
+!.env.example
+*.wav
+*.mp3
+*.mp4
+*.m4a
+*.webm

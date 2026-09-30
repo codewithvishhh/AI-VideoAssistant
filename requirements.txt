@@ -1,0 +1,48 @@
+# ── AI Meeting Assistant ── requirements.txt (Backend) ────────────────────────
+# Python >= 3.10 recommended
+# NOTE: This is the FastAPI backend only. The frontend is a separate
+# Next.js/React app with its own package.json — not part of this file.
+
+# ── Audio / Video acquisition ─────────────────────────────────────────────────
+yt-dlp>=2024.4.9                  # Download audio from YouTube URLs
+pydub>=0.25.1                     # Audio file manipulation / format conversion
+ffmpeg-python>=0.2.0              # FFmpeg bindings (FFmpeg binary must be installed separately)
+
+# ── Speech-to-Text (local, faster-whisper) ────────────────────────────────────
+faster-whisper>=1.0.3             # Same accuracy as OpenAI Whisper, ~4x faster on CPU/GPU
+                                   # (uses CTranslate2 backend — no separate torch/torchaudio needed)
+
+# ── Translation (Hindi → English) ─────────────────────────────────────────────
+deep-translator>=1.11.4           # Lightweight translation wrapper (Google backend)
+
+# ── LLM Orchestration — LangChain LCEL + Groq ─────────────────────────────────
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+langchain-groq>=0.1.9             # LangChain wrapper for Groq API
+groq>=0.9.0                       # Official Groq Python client
+
+# ── RAG Pipeline ──────────────────────────────────────────────────────────────
+chromadb>=0.5.0                   # Local vector store
+sentence-transformers>=3.0.0      # HuggingFace embedding models
+langchain-huggingface>=0.0.3      # LangChain ↔ HuggingFace embeddings bridge
+huggingface-hub>=0.23.0           # Model downloading from HuggingFace Hub
+tiktoken>=0.7.0                   # Token counting for text splitting
+
+# ── FastAPI Backend (replaces Streamlit) ──────────────────────────────────────
+fastapi>=0.111.0                  # API framework serving the React frontend
+uvicorn[standard]>=0.30.0         # ASGI server to run FastAPI
+python-multipart>=0.0.9           # Required for handling file uploads (video/audio)
+pydantic>=2.7.0                   # Request/response validation
+websockets>=12.0                  # Optional: live progress updates while processing
+
+# ── PDF & TXT Export ──────────────────────────────────────────────────────────
+reportlab>=4.2.0                  # PDF generation
+fpdf2>=2.7.9                      # Lightweight alternative PDF library
+# weasyprint>=62.0                # Optional upgrade: HTML/CSS -> PDF for nicer-looking reports
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0              # Load API keys from .env
+numpy>=1.26.0
+tqdm>=4.66.0                      # Progress bars
+requests>=2.32.0
